@@ -1,15 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap');
 @import "tailwindcss";
 
 
 
-/* Apply League Spartan to all headings (titles) */
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'League Spartan', var(--font-display, 'Poppins'), sans-serif;
-}
-
-p {
-    font-family: 'Poppins', var(--font-display, sans-serif);
-}
 
