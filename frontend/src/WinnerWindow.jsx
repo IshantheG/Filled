@@ -7,9 +7,9 @@ export default function WinnerWindow({ s1, s2, reset }) {
     return (
 
 
-    //WIndow
+    //Window
     <div className="absolute inset-0 flex items-center justify-center z-50 animate-fadeIn">
-        
+
         <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
         <div className="relative bg-white rounded-3xl p-12 shadow-2xl animate-scaleIn">
             <div className="text-center">

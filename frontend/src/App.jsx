@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { RotateCcw, Users} from 'lucide-react';
-
+import "./index.css";
 const COLORS = ['#FF6B6B', '#2bd154ff', '#0d88e7ff', '#fffa72ff', '#474444', '#841cd9ff'];
 import {initBoard, getSize, getValidMoves, applyMove, isGameOver, ROWS, COLS} from './GameLogic.js';
 import WinnerWindow from './WinnerWindow.jsx';

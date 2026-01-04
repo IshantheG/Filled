@@ -93,7 +93,7 @@ export  function getValidMoves(b, isP1) {
 }
 
 
-export  function applyMove(b, colour, isP1) {
+export function applyMove(b, colour, isP1) {
   const nb = b.map(r => [...r]);
   const [startR, startC] = isP1 ? [ROWS-1, 0] : [0, COLS-1];
   const oldCol = nb[startR][startC];

@@ -13,6 +13,7 @@ export default function AIPlayer() {
     const [isP1Turn, setIsP1Turn] = useState(true);
     const [rotation, setRotation] = useState(0);
     const [showWinner, setShowWinner] = useState(false);
+    const [isAIThinking, setIsAIThinking] = useState(false);
 
     const s1 = getSize(b, ROWS - 1, 0);
     const s2 = getSize(b, 0, COLS - 1);
@@ -26,6 +27,36 @@ export default function AIPlayer() {
             setTimeout(() => setShowWinner(true), 300);
         }
     }, [b]);
+
+    useEffect(() => {
+        // AI (P2) makes a move when it's their turn
+        if (!isP1Turn && !over && !isAIThinking) {
+            setIsAIThinking(true);
+            
+            // Call backend API to get AI move
+            fetch('http://127.0.0.1:8000/api/ai-move', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ board: b })
+            })
+            .then(res => res.json())
+            .then(data => {
+                const aiMove = data.colour;
+                const nb = applyMove(b, aiMove, false); // false = P2
+                setB(nb);
+                
+                if (!isGameOver(nb)) {
+                    setRotation(rotation + 180);
+                    setIsP1Turn(true);
+                }
+                setIsAIThinking(false);
+            })
+            .catch(err => {
+                console.error('AI request failed:', err);
+                setIsAIThinking(false);
+            });
+        }
+    }, [isP1Turn, over, b, rotation, isAIThinking]);
 
     function play(colour) {
         if (over || !vms.includes(colour)) return;
@@ -45,6 +76,7 @@ export default function AIPlayer() {
         setIsP1Turn(true);
         setRotation(0);
         setShowWinner(false);
+        setIsAIThinking(false);
     }
 
     return (
@@ -106,21 +138,29 @@ export default function AIPlayer() {
 
                 {!over ? (
                     <div className="mb-4">
-                        <div className="text-sm text-gray-600 font-medium mb-3">Choose a colour:</div>
-                        <div className="flex gap-3">
-                            {COLORS.map((colour, i) => (
-                                <button
-                                    key={i}
-                                    onClick={() => play(i)}
-                                    disabled={!vms.includes(i)}
-                                    className="w-16 h-16 rounded-xl shadow-lg border-4 transition-all disabled:opacity-20 disabled:cursor-not-allowed hover:scale-110 hover:shadow-xl active:scale-95"
-                                    style={{
-                                        backgroundColor: colour,
-                                        borderColor: vms.includes(i) ? '#1f2937' : '#d1d5db'
-                                    }}
-                                />
-                            ))}
-                        </div>
+                        {isAIThinking ? (
+                            <div className="text-center text-gray-600 font-medium py-4">
+                                <span>AI is thinking...</span>
+                            </div>
+                        ) : isP1Turn ? (
+                            <>
+                                <div className="text-sm text-gray-600 font-medium mb-3">Choose a colour:</div>
+                                <div className="flex gap-3">
+                                    {COLORS.map((colour, i) => (
+                                        <button
+                                            key={i}
+                                            onClick={() => play(i)}
+                                            disabled={!vms.includes(i)}
+                                            className="w-16 h-16 rounded-xl shadow-lg border-4 transition-all disabled:opacity-20 disabled:cursor-not-allowed hover:scale-110 hover:shadow-xl active:scale-95"
+                                            style={{
+                                                backgroundColor: colour,
+                                                borderColor: vms.includes(i) ? '#1f2937' : '#d1d5db'
+                                            }}
+                                        />
+                                    ))}
+                                </div>
+                            </>
+                        ) : null}
                     </div>
                 ) : (
                     <div className="h-24" />
