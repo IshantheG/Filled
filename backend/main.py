@@ -1,3 +1,6 @@
+from .app.main import api
+
+
 def main():
     print("Hello from backend!")
 
