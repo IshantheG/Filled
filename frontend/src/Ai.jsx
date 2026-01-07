@@ -34,7 +34,7 @@ export default function AIPlayer() {
             setIsAIThinking(true);
             
             // Call backend API to get AI move
-            fetch('http://127.0.0.1:8000/api/ai-move', {
+            fetch('https://filled.onrender.com/api/ai-move', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ board: b })
