@@ -1,0 +1,6 @@
+fastapi[all]>=0.128.0
+langchain>=1.2.0
+psycopg2-binary>=2.9.11
+python-env>=1.0.0
+sqlalchemy>=2.0.45
+uvicorn>=0.40.0
