@@ -10,7 +10,7 @@ api = FastAPI()
 
 api.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "https://fillerzero-git-main-ishanthegs-projects.vercel.app"],
+    allow_origins=["http://localhost:5173", "https://fillerzero-git-main-ishanthegs-projects.vercel.app", "https://fillerzero.vercel.app/ai"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
