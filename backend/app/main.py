@@ -11,7 +11,7 @@ api = FastAPI(title="Filler Game API")
 api.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://fillerzero.vercel.app,  
+        "https://fillerzero.vercel.app",  
         "fillerzero-fsnq1d6ek-ishanthegs-projects.vercel.app",  
         "http://127.0.0.1:5173",
         "http://127.0.0.1:3000",
