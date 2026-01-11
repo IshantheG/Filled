@@ -4,29 +4,24 @@ import random
 ROWS = 7
 COLS = 8
 def init_board():
-    """Initialize a 13x13 game board with randomized colors"""
-    # Create board with random colors
+    
     board = [[random.randint(0, 5) for _ in range(COLS)] for _ in range(ROWS)]
     
-    # Ensure no horizontal adjacencies
     for i in range(ROWS):
         for j in range(1, COLS):
             if board[i][j] == board[i][j-1]:
                 available = [c for c in range(6) if c != board[i][j-1]]
                 board[i][j] = random.choice(available)
     
-    # Ensure no vertical adjacencies
     for j in range(COLS):
         for i in range(1, ROWS):
             if board[i][j] == board[i-1][j]:
                 available = [c for c in range(6) if c != board[i-1][j]]
                 board[i][j] = random.choice(available)
     
-    # Ensure player corners are different colors
     while board[ROWS-1][0] == board[0][COLS-1]:
         board[0][COLS-1] = random.randint(0, 4)
     
-    # Ensure Player 1 corner neighbors are different
     p1_color = board[ROWS-1][0]
     if ROWS > 1 and board[ROWS-2][0] == p1_color:
         available = [c for c in range(6) if c != p1_color]
@@ -36,7 +31,6 @@ def init_board():
         available = [c for c in range(6) if c != p1_color]
         board[ROWS-1][1] = random.choice(available)
     
-    # Ensure Player 2 corner neighbors are different
     p2_color = board[0][COLS-1]
     if ROWS > 1 and board[1][COLS-1] == p2_color:
         available = [c for c in range(6) if c != p2_color]
@@ -57,10 +51,8 @@ def apply_move_to_board(board, colour, is_player_one):
     if old_colour == colour:
         return board
     
-    # Create a copy of the board
     new_board = [row[:] for row in board]
     
-    # Flood fill
     stack = [(start_r, start_c)]
     visited = set()
     
@@ -76,7 +68,6 @@ def apply_move_to_board(board, colour, is_player_one):
         visited.add((r, c))
         new_board[r][c] = colour
         
-        # Add neighbors
         stack.extend([(r+1, c), (r-1, c), (r, c+1), (r, c-1)])
     
     return new_board
