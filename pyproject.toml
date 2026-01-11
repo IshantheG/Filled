@@ -11,4 +11,5 @@ dependencies = [
     "python-env>=1.0.0",
     "sqlalchemy>=2.0.45",
     "uvicorn>=0.40.0",
+    "websockets>=16.0",
 ]

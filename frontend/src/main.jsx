@@ -1,4 +1,4 @@
-import { StrictMode } from 'react'
+
 import { createRoot } from 'react-dom/client'
 
 
@@ -20,12 +20,18 @@ const router = createBrowserRouter([{
   {
   path: "/ai",
   element: <GamePage mode = {"ai"} />
+  },
+
+  {
+    path: "/room/:roomId",
+    element: <GamePage mode = {"online-player"} />
   }
+
 
 ])
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+  
     <RouterProvider router={router}/>
-  </StrictMode>,
+  
 )
