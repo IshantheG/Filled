@@ -1,18 +1,18 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-# Import your routers from routes folder
+
 from .routes import endpoints, ws
 
 # Create the FastAPI app
 api = FastAPI(title="Filler Game API")
 
-# CRITICAL: Configure CORS to allow WebSocket connections
+
 api.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:5173",  # Vite default
-        "http://localhost:3000",  # React default
+        "https://fillerzero.vercel.app,  
+        "fillerzero-fsnq1d6ek-ishanthegs-projects.vercel.app",  
         "http://127.0.0.1:5173",
         "http://127.0.0.1:3000",
     ],
