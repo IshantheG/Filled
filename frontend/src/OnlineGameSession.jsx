@@ -13,7 +13,7 @@ export default function OnlineGameSession() {
     if (!roomId) return;
 
     console.log("Creating WS for room:", roomId);
-    const ws = new WebSocket(`ws://localhost:8000/ws/${roomId}`);
+    const ws = new WebSocket(`wss://filled.onrender.com/ws/${roomId}`);
     socketRef.current = ws;
 
     ws.onopen = () => {
